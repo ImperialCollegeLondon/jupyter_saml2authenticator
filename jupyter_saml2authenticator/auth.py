@@ -4,7 +4,7 @@ from tornado import gen, web
 from tornado.log import app_log
 
 from jupyterhub.handlers import BaseHandler
-from jupyterhub.auth import Authenticator
+from jupyterhub.auth import Authenticator, LocalAuthenticator
 from jupyterhub.utils import url_path_join
 from traitlets import Unicode, Bool, List
 
@@ -248,3 +248,7 @@ class Saml2Authenticator(Authenticator):
             raise web.HTTPError(500)
         username = user_identity[self.saml2_attribute_username][0]
         return username
+
+class LocalSaml2Authenticator(LocalAuthenticator, Saml2Authenticator):
+    """A version that mixes in local system user creation"""
+    pass

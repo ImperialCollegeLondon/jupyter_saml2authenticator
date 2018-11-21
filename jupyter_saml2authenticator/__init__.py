@@ -1,1 +1,2 @@
-from .jupyter_saml2authenticator import *
+from .auth import Saml2Authenticator
+from .auth import LocalSaml2Authenticator
