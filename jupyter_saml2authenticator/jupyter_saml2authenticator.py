@@ -228,7 +228,7 @@ class Saml2Authenticator(Authenticator):
                 resp, entity.BINDING_HTTP_POST)
         except:
             app_log.error('parse_..._response failed: %r',
-                base64.b64decode(authn_response))
+                base64.b64decode(resp))
             raise
         if authn_response is None:
             raise web.HTTPError(400, "SAML2 response failed")
