@@ -28,15 +28,15 @@ only needs to be trusted by your users' browsers).
 This package has currently only been tested against Azure Active Directory,
 although it should work with any SAML2 IdP  (do let me know if you try it).  If
 you are configuring your IdP then set the Entity ID and Reply URL to match the
-above otherise just note them down.  Get the metadata URL (App Federation
+above otherwise just note them down.  Get the metadata URL (App Federation
 Metadata URL) or download the metadata XML.  Discover what attributes will be
 in an authenticated response, and what key the username will have.
 
 ### Configure the authenticator
 In the `jupyterhub_config.py` file remove any references to other
 authenticators and add the following lines.  Only one of the `saml2_metadata_*`
-options is required.  Some IdPs will require the Entity ID too.  Other options
-are, er, optional.
+options is required, and `saml2_attribute_username`  Some IdPs will require the
+Entity ID too.  Other options are, er, optional.
 
 ```python
 from jupyter_saml2authenticator import Saml2Authenticator
@@ -55,8 +55,12 @@ c.Saml2Authenticator.saml2_entity_id = 'https://myjupyterhubsite/saml2_auth/ent'
 # This one works for Azure Active Directory.
 c.Saml2Authenticator.saml2_attribute_username = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
 
+# The login_service text.  What gets written on the sign-in button after
+# "Sign in with".  Defaults to "SAML2 Single Sign-on".
+# c.Saml2Authenticator.login_service = "SAML2 Single Sign-on"
+
 # Er, I don't know what this is. From django-saml2-auth:
-# FormatString. Sets the Format property of authn NameIDPolicy 
+# "FormatString. Sets the Format property of authn NameIDPolicy"
 # c.Saml2Authenticator.saml2_name_id_format
 
 # Whether to remove any @domain parts of the returned username.  You might want to

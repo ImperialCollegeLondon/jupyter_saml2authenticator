@@ -73,13 +73,7 @@ class Saml2AuthLoginHandler(BaseHandler):
         return self.redirect(redirect_url)
 
 class Saml2Authenticator(Authenticator):
-    """Base class for Saml2Authenticators
-
-    Subclasses must override:
-
-    login_service (string identifying the service provider)
-    login_handler (likely a subclass of Saml2AuthLoginHandler)
-    authenticate (method takes one arg - the request handler handling the Saml2Auth callback)
+    """Saml2Authenticator
     """
 
     login_handler = Saml2AuthLoginHandler
