@@ -138,7 +138,6 @@ class Saml2Authenticator(Authenticator):
         """
     )
 
-    username_map = { 'scliffor': 'simon' }
     def get_current_domain(self, handler):
         return '{scheme}://{host}'.format(
             scheme=handler.request.protocol,
